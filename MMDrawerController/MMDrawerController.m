@@ -304,6 +304,8 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
         
         [sideDrawerViewController beginAppearanceTransition:NO animated:animated];
         
+        [self updateDrawerVisualStateForDrawerSide:visibleSide percentVisible:0.0];
+        
         [UIView
          animateWithDuration:(animated?duration:0.0)
          delay:0.0
@@ -311,7 +313,6 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
          animations:^{
              [self setNeedsStatusBarAppearanceUpdateIfSupported];
              [self.centerContainerView setFrame:newFrame];
-             [self updateDrawerVisualStateForDrawerSide:visibleSide percentVisible:0.0];
          }
          completion:^(BOOL finished) {
              [sideDrawerViewController endAppearanceTransition];
@@ -367,9 +368,9 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
              animations:^{
                  [self setNeedsStatusBarAppearanceUpdateIfSupported];
                  [self.centerContainerView setFrame:newFrame];
-                 [self updateDrawerVisualStateForDrawerSide:drawerSide percentVisible:1.0];
              }
              completion:^(BOOL finished) {
+                 [self updateDrawerVisualStateForDrawerSide:drawerSide percentVisible:1.0];
                  //End the appearance transition if it already wasn't open.
                  if(drawerSide != self.openSide){
                      [sideDrawerViewController endAppearanceTransition];
